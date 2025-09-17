@@ -20,8 +20,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'username',
         'email',
         'password',
+        'role',
+        'workshop_id'
     ];
 
     /**
@@ -57,5 +60,30 @@ class User extends Authenticatable
             ->take(2)
             ->map(fn ($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+
+    public function workshop()
+    {
+        return $this->belongsTo(Workshop::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class, 'owner_id');
+    }
+
+    public function serviceRequests()
+    {
+        return $this->hasMany(ServiceRequest::class, 'customer_id');
+    }
+
+    public function assignedRequests()
+    {
+        return $this->hasMany(ServiceRequest::class, 'technician_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 }
