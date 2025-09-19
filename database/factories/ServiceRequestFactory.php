@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Customer;
 use App\Models\ServiceLog;
 use App\Models\ServiceType;
 use App\Models\User;
@@ -23,7 +24,7 @@ class ServiceRequestFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id' => User::factory(),
+            'customer_id' => Customer::factory(),
             'workshop_id' => Workshop::factory(),
             'vehicle_id' => Vehicle::factory(),
             'service_type_id' => ServiceType::factory(),

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Customer;
 use App\Models\Notification;
 use App\Models\ServiceLog;
 use App\Models\ServiceRequest;
@@ -33,8 +34,8 @@ class DatabaseSeeder extends Seeder
     });
 
     // Create Customers with Vehicles
-        User::factory(5)->create(['role' => 'Customer'])->each(function ($user) {
-        Vehicle::factory(2)->create(['customer_id' => $user->id]);
+        Customer::factory(5)->create()->each(function ($customer) {
+            Vehicle::factory(2)->create(['customer_id' => $customer->id]);
         });
 
         ServiceType::factory(5)->create();
@@ -47,11 +48,25 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'username' => 'superadmin',
-            'email' => 'admin@bbi.test',
-            'role' => 'SuperAdmin',
-            'password' => bcrypt('admin123'),
+        User::firstOrCreate(
+            ['username' => 'superadmin'],
+            [
+                'name' => 'Super Admin',
+                'email' => 'admin@bbi.test',
+                'email_verified_at' => now(),
+                'role' => 'SuperAdmin',
+                'password' => bcrypt('admin123'),
+                'workshop_id' => null,
+            ]
+        );
+
+
+        $this->call([
+            VoucherSeeder::class,
+        ]);
+
+        $this->call([
+            InvoiceSeeder::class,
         ]);
     }
 }

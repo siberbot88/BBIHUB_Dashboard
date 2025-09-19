@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('total_cost', 10, 2);
             $table->string('receipt_image')->nullable();
+            $table->dropColumn('receipt_image');
+            $table->foreignId('invoice_id')->nullable()->constrained('invoices')->nullOnDelete();
             $table->timestamps();
         });
     }

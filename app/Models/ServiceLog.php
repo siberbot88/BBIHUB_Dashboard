@@ -28,4 +28,9 @@ class ServiceLog extends Model
     {
         return $this->belongsTo(Workshop::class);
     }
+    public function invoice()
+    {
+        return $this->belongsTo(Invoice::class);
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Invoice;
 use App\Models\Vehicle;
 use App\Models\Workshop;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -22,10 +23,10 @@ class ServiceLogFactory extends Factory
         return [
             'vehicle_id' => Vehicle::factory(),
             'workshop_id' => Workshop::factory(),
+            'invoice_id' =>  Invoice::factory(),
             'service_date' => $this->faker->date(),
             'description' => $this->faker->sentence(10),
-            'total_cost' => $this->faker->randomFloat(2, 150, 1000),
-            'receipt_image' => $this->faker->imageUrl(640, 480, 'business'),
+            'total_cost' => $this->faker->randomFloat(2, 150000, 1000000),
         ];
     }
 }

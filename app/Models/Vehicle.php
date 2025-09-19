@@ -21,9 +21,9 @@ class Vehicle extends Model
 
     public function customer()
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(Customer::class);
     }
-
+    
     public function serviceRequests()
     {
         return $this->hasMany(ServiceRequest::class);
@@ -32,5 +32,9 @@ class Vehicle extends Model
     public function serviceLogs()
     {
         return $this->hasMany(ServiceLog::class);
+    }
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
     }
 }

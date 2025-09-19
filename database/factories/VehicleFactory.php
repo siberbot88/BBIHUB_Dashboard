@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,7 +19,7 @@ class VehicleFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id' => User::factory(),
+            'customer_id' => Customer::factory(),
             'brand' => $this->faker->randomElement(['Yamaha', 'Honda', 'Suzuki', 'Kawasaki']),
             'model' => $this->faker->randomElement([
                 'Yamaha NMAX 155',

@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('invoice_items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers')->onDelete('cascade');
-            $table->string('brand');
-            $table->string('model');
-            $table->year('year');
-            $table->string('license_plate')->unique();
-            $table->string('vehicle_image')->nullable();
+            $table->foreignId('invoice_id')->constrained()->onDelete('cascade');
+            $table->string('service_name');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicles');
+        Schema::dropIfExists('invoice_items');
     }
 };

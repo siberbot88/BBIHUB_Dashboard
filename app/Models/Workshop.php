@@ -33,4 +33,8 @@ class Workshop extends Model
     {
         return $this->hasMany(ServiceLog::class);
     }
+    public function vouchers()
+    {
+        return $this->hasMany(Voucher::class);
+    }
 }
